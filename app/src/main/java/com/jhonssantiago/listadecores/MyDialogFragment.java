@@ -3,6 +3,9 @@ package com.jhonssantiago.listadecores;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +20,28 @@ public class MyDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
       //  return super.onCreateDialog(savedInstanceState);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Como está o clima?")
+        LayoutInflater inflater = getLayoutInflater();
+
+        View view = inflater.inflate(R.layout.dialog, null);
+        builder.setView(view)
+                .setTitle("caixa Personalizada")
+                .setPositiveButton("sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        EditText editText = view.findViewById(R.id.editTextNomes);
+                        String nome = editText.getText().toString();
+                        Toast.makeText(getActivity().getApplicationContext(), "voce clicou em sim"+ nome, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("não", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getActivity().getApplicationContext(), "voce clicou em não ", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+      /*  builder.setMessage("Como está o clima?")
                 .setTitle("Responda a pergunta")
                 .setIcon(R.mipmap.ic_launcher)
                 .setPositiveButton("Frio", new DialogInterface.OnClickListener() {
@@ -37,7 +61,7 @@ public class MyDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast.makeText(getActivity().getApplicationContext(), "Aproveite o Dia", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }); */
         return builder.create();
     }
 
