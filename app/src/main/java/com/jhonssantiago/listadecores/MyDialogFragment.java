@@ -2,6 +2,7 @@ package com.jhonssantiago.listadecores;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,20 @@ public class MyDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
       //  return super.onCreateDialog(savedInstanceState);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getLayoutInflater();
 
+        builder.setTitle("Escolha o dia da semana")
+                .setIcon(R.mipmap.ic_launcher)
+                .setItems(R.array.array_semana, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getActivity().getApplicationContext(), "voce clicou em "+ i, Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getActivity().getApplicationContext(), recuperarItem(i), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+      /*  LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog, null);
         builder.setView(view)
                 .setTitle("caixa Personalizada")
@@ -38,7 +51,7 @@ public class MyDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast.makeText(getActivity().getApplicationContext(), "voce clicou em não ", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }); */
 
 
       /*  builder.setMessage("Como está o clima?")
@@ -63,6 +76,12 @@ public class MyDialogFragment extends DialogFragment {
                     }
                 }); */
         return builder.create();
+    }
+
+    private String recuperarItem(int i){
+        Resources resources = getResources();
+        String [] dias_semanas = resources.getStringArray(R.array.array_semana);
+        return dias_semanas[i];
     }
 
 }

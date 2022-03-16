@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Lista de Cores</string>
+    <array name="array_semana">
+        <item>Segunda-feira</item>
+        <item>Terça-feira</item>
+        <item>Quarta-feira</item>
+        <item>Quinta-feira</item>
+        <item>Sexta-feira</item>
+        <item>Sabado</item>
+        <item>Domingo</item>
+    </array>
 </resources>
